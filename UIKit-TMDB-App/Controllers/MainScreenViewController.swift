@@ -9,6 +9,8 @@ import UIKit
 
 class MainScreenViewController: UIViewController {
     
+    private var headerView: HeaderUIView?
+    
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(UITableViewCell.self, forCellReuseIdentifier:  K.MainScreen.cell)
@@ -24,8 +26,11 @@ class MainScreenViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        headerView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
+        tableView.tableHeaderView = headerView
+        
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
