@@ -12,5 +12,9 @@ struct K {
         static let url = "https://api.themoviedb.org"
         static let key = "68ca79afd1e1e5b9579ef55a2f064725"
     }
-
+    
+    struct MainScreen {
+        static let cell = "mainScreenViewCell"
+    }
+    
 }
