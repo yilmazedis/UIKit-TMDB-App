@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MovieDetailScreenViewController: UIViewController {
+final class MovieDetailScreenViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()

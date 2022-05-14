@@ -8,7 +8,7 @@
 import UIKit
 import ImageSlideshow
 
-class MainScreenViewController: UIViewController {
+final class MainScreenViewController: UIViewController {
     
     private var headerView: HeaderUIView?
     
@@ -26,12 +26,33 @@ class MainScreenViewController: UIViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        
-        headerView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300))
-        tableView.tableHeaderView = headerView
-        
+
         //tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         tableView.contentInsetAdjustmentBehavior = .never
+        
+        
+        configureHeaderUIView()
+    }
+    
+    private func configureHeaderUIView() {
+        
+        headerView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300))
+
+        
+        MainScreenViewModel.shared.fetchNowPlayingMovies { [weak self] in
+            
+            guard let movies = MainScreenViewModel.shared.getMovies() else {
+                print("Error getting movies")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.headerView?.configure(with: movies)
+            }
+        }
+        
+        
+        tableView.tableHeaderView = headerView
     }
     
     override func viewDidLayoutSubviews() {

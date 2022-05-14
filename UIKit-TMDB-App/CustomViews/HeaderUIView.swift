@@ -10,10 +10,14 @@ import ImageSlideshow
 
 class HeaderUIView: UIView {
     
-    private let localSource = [BundleImageSource(imageString: "American Beauty"),
-                               BundleImageSource(imageString: "Green Book"),
-                               BundleImageSource(imageString: "The Great Beauty"),
-                               BundleImageSource(imageString: "There Will Be Blood")]
+//    private let localSource = [BundleImageSource(imageString: "American Beauty"),
+//                               BundleImageSource(imageString: "Green Book"),
+//                               BundleImageSource(imageString: "The Great Beauty"),
+//                               BundleImageSource(imageString: "There Will Be Blood")]
+//
+    
+    private var title = [String]()
+    private var overview = [String]()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 375.0, height: 256.0))
@@ -56,7 +60,7 @@ class HeaderUIView: UIView {
         
         //slideshow.pageIndicator =
         slideshow.delegate = self
-        slideshow.setImageInputs(localSource)
+        //slideshow.setImageInputs(localSource)
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
         slideshow.addGestureRecognizer(recognizer)
@@ -88,13 +92,21 @@ class HeaderUIView: UIView {
 //        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
     }
 
-//    public func configure(with model: TitleViewModel) {
-//        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model.posterURL)") else {
-//            return
-//        }
-//
-//        heroImageView.sd_setImage(with: url, completed: nil)
-//    }
+    func configure(with model: [MovieInfo]) {
+        
+    
+        var imageSource = [AlamofireSource]()
+        
+        for model in model {
+            
+            title.append(model.original_title)
+            overview.append(model.overview)
+            
+            imageSource.append(AlamofireSource(urlString: "https://image.tmdb.org/t/p/original/" + model.poster_path)!)
+        }
+            
+        slideshow.setImageInputs(imageSource)
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -104,11 +116,14 @@ class HeaderUIView: UIView {
     required init?(coder: NSCoder) {
         fatalError()
     }
-
 }
 
 extension HeaderUIView: ImageSlideshowDelegate {
     func imageSlideshow(_ imageSlideshow: ImageSlideshow, didChangeCurrentPageTo page: Int) {
+        
+        titleLabel.text = title[page]
+        descriptionLabel.text = overview[page]
+        
         print("current page:", page)
     }
 }

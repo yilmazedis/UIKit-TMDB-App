@@ -7,6 +7,7 @@ target 'UIKit-TMDB-App' do
 
   # Pods for UIKit-TMDB-App
   pod 'ImageSlideshow', '~> 1.9.0'
+  pod "ImageSlideshow/Alamofire"
 
   target 'UIKit-TMDB-AppTests' do
     inherit! :search_paths
