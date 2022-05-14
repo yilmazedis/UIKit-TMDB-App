@@ -18,6 +18,7 @@
 		019B5D82282EEE3E0079159F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D81282EEE3E0079159F /* Constants.swift */; };
 		019B5D84282F12420079159F /* MovieDetailScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D83282F12420079159F /* MovieDetailScreenViewController.swift */; };
 		019B5D88282F1C570079159F /* HeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D87282F1C570079159F /* HeaderUIView.swift */; };
+		019B5D8B282FCEDD0079159F /* CustomViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D8A282FCEDD0079159F /* CustomViewCell.swift */; };
 		04BA5790DA238D4E63E371B7 /* Pods_UIKit_TMDB_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188729CD2908BF77176D5FFF /* Pods_UIKit_TMDB_App.framework */; };
 		A624385B81BA60D055AF4068 /* Pods_UIKit_TMDB_App_UIKit_TMDB_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B8465210A7AA0B84DF1AEA /* Pods_UIKit_TMDB_App_UIKit_TMDB_AppUITests.framework */; };
 		DA473EE5E18966CC4147F95C /* Pods_UIKit_TMDB_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE90C2305CA7BD3A6592EE8D /* Pods_UIKit_TMDB_AppTests.framework */; };
@@ -56,6 +57,7 @@
 		019B5D81282EEE3E0079159F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		019B5D83282F12420079159F /* MovieDetailScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailScreenViewController.swift; sourceTree = "<group>"; };
 		019B5D87282F1C570079159F /* HeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderUIView.swift; sourceTree = "<group>"; };
+		019B5D8A282FCEDD0079159F /* CustomViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewCell.swift; sourceTree = "<group>"; };
 		188729CD2908BF77176D5FFF /* Pods_UIKit_TMDB_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UIKit_TMDB_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3477CF8423FB592DDE1F4461 /* Pods-UIKit-TMDB-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKit-TMDB-App.debug.xcconfig"; path = "Target Support Files/Pods-UIKit-TMDB-App/Pods-UIKit-TMDB-App.debug.xcconfig"; sourceTree = "<group>"; };
 		4884D066689C05A953425367 /* Pods-UIKit-TMDB-App-UIKit-TMDB-AppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UIKit-TMDB-App-UIKit-TMDB-AppUITests.release.xcconfig"; path = "Target Support Files/Pods-UIKit-TMDB-App-UIKit-TMDB-AppUITests/Pods-UIKit-TMDB-App-UIKit-TMDB-AppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		019B5D4E282EEA7D0079159F /* UIKit-TMDB-App */ = {
 			isa = PBXGroup;
 			children = (
+				019B5D89282FBDA70079159F /* Models */,
 				019B5D86282F1C250079159F /* Views */,
 				019B5D85282F124B0079159F /* Controllers */,
 				019B5D7F282EEE200079159F /* Utils */,
@@ -170,8 +173,16 @@
 			isa = PBXGroup;
 			children = (
 				019B5D87282F1C570079159F /* HeaderUIView.swift */,
+				019B5D8A282FCEDD0079159F /* CustomViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		019B5D89282FBDA70079159F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		B73C7E8EC793E859D75CC873 /* Frameworks */ = {
@@ -194,7 +205,6 @@
 				FEBF9823E1037E6880463ACA /* Pods-UIKit-TMDB-AppTests.debug.xcconfig */,
 				63C56EA1AD9C72D7FF8C00B2 /* Pods-UIKit-TMDB-AppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -438,6 +448,7 @@
 			files = (
 				019B5D54282EEA7D0079159F /* MainScreenViewController.swift in Sources */,
 				019B5D84282F12420079159F /* MovieDetailScreenViewController.swift in Sources */,
+				019B5D8B282FCEDD0079159F /* CustomViewCell.swift in Sources */,
 				019B5D50282EEA7D0079159F /* AppDelegate.swift in Sources */,
 				019B5D88282F1C570079159F /* HeaderUIView.swift in Sources */,
 				019B5D52282EEA7D0079159F /* SceneDelegate.swift in Sources */,
