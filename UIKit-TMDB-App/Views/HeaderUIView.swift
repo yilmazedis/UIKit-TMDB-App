@@ -6,66 +6,46 @@
 //
 
 import UIKit
+import ImageSlideshow
 
 class HeaderUIView: UIView {
+    
+    private let localSource = [BundleImageSource(imageString: "American Beauty"),
+                               BundleImageSource(imageString: "Green Book"),
+                               BundleImageSource(imageString: "The Great Beauty"),
+                               BundleImageSource(imageString: "There Will Be Blood")]
 
-
-//    private let downloadButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("Download", for: .normal)
-//        button.layer.borderColor = UIColor.white.cgColor
-//        button.layer.borderWidth = 1
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.layer.cornerRadius = 5
-//        return button
-//    }()
-//
-//    private let playButton: UIButton = {
-//
-//        let button = UIButton()
-//        button.setTitle("Play", for: .normal)
-//        button.layer.borderColor = UIColor.white.cgColor
-//        button.layer.borderWidth = 1
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.layer.cornerRadius = 5
-//        return button
-//    }()
-
-    private let heroImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "Green Book")
-        return imageView
+    private let slideshow: ImageSlideshow = {
+        let slideshow = ImageSlideshow()
+        
+        slideshow.clipsToBounds = true
+        
+        slideshow.slideshowInterval = 5.0
+        //slideshow.pageIndicatorPosition = .init(horizontal: , vertical: .under)
+        slideshow.contentScaleMode = .scaleAspectFill
+        
+        slideshow.activityIndicator = DefaultActivityIndicator()
+        
+        return slideshow
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(heroImageView)
-//        addSubview(playButton)
-//        addSubview(downloadButton)
-        //applyConstraints()
+        addSubview(slideshow)
+        
+        //slideshow.pageIndicator =
+        slideshow.delegate = self
+        slideshow.setImageInputs(localSource)
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
+        slideshow.addGestureRecognizer(recognizer)
     }
 
-//    private func applyConstraints() {
-//
-//        let playButtonConstraints = [
-//            playButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 70),
-//            playButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
-//            playButton.widthAnchor.constraint(equalToConstant: 120)
-//        ]
-//
-//        let downloadButtonConstraints = [
-//            downloadButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -70),
-//            downloadButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
-//            downloadButton.widthAnchor.constraint(equalToConstant: 120)
-//        ]
-//
-//        NSLayoutConstraint.activate(playButtonConstraints)
-//        NSLayoutConstraint.activate(downloadButtonConstraints)
-//    }
-
-
+    @objc func didTap() {
+//        let fullScreenController = slideshow.presentFullScreenController(from: self)
+//        // set the activity indicator for full screen controller (skipping the line will show no activity indicator)
+//        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+    }
 
 //    public func configure(with model: TitleViewModel) {
 //        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model.posterURL)") else {
@@ -77,11 +57,17 @@ class HeaderUIView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        heroImageView.frame = bounds
+        slideshow.frame = bounds
     }
 
     required init?(coder: NSCoder) {
         fatalError()
     }
 
+}
+
+extension HeaderUIView: ImageSlideshowDelegate {
+    func imageSlideshow(_ imageSlideshow: ImageSlideshow, didChangeCurrentPageTo page: Int) {
+        print("current page:", page)
+    }
 }

@@ -26,9 +26,11 @@ class MainScreenViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        headerView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 500))
+        headerView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 256))
         tableView.tableHeaderView = headerView
         
+        //tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        tableView.contentInsetAdjustmentBehavior = .never
     }
     
     override func viewDidLayoutSubviews() {
@@ -41,7 +43,7 @@ class MainScreenViewController: UIViewController {
 extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 30
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
