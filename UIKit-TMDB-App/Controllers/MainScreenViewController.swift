@@ -53,6 +53,17 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
         return 30
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("sds")
+        
+        
+//        let detailScreen = UINavigationController(rootViewController: MovieDetailScreenViewController())
+//        detailScreen.modalPresentationStyle = .fullScreen
+//
+        navigationController?.pushViewController(MovieDetailScreenViewController(), animated: true)
+        //present(MovieDetailScreenViewController(), animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: K.MainScreen.cell, for: indexPath) as? CustomViewCell
@@ -71,6 +82,8 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
         cell.accessoryType = .disclosureIndicator
         
         //cell.indentationLevel = 2
+        
+        
                 
         return cell
     }
