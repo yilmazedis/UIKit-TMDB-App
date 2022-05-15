@@ -43,7 +43,6 @@ final class MainScreenViewModel {
             return MovieInfo(id: 0,
                              original_title: "",
                              overview: "",
-                             vote_average: 0,
                              release_date: "",
                              poster_path: "",
                              backdrop_path: "")
@@ -57,7 +56,6 @@ final class MainScreenViewModel {
             return MovieInfo(id: 0,
                              original_title: "",
                              overview: "",
-                             vote_average: 0,
                              release_date: "",
                              poster_path: "",
                              backdrop_path: "")

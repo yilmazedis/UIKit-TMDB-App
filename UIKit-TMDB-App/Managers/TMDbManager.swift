@@ -59,7 +59,7 @@ class TMDbManager {
         task.resume()
     }
     
-    func fetchMovie(with urlStr: String, completion: @escaping (Result<MovieInfo, Error>) -> Void) {
+    func fetchMovie(with urlStr: String, completion: @escaping (Result<MovieInfoDetail, Error>) -> Void) {
         
         guard let url = URL(string: urlStr) else {
             print("Fail to conver urlStr to url")
@@ -89,7 +89,7 @@ class TMDbManager {
             }
 
             do {
-                let result = try JSONDecoder().decode(MovieInfo.self, from: data)
+                let result = try JSONDecoder().decode(MovieInfoDetail.self, from: data)
                 completion(.success(result))
             } catch {
                 completion(.failure(ManagerFail.decode))

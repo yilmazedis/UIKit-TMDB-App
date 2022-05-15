@@ -9,7 +9,7 @@ import Foundation
 
 final class MovieDetailScreenViewModel {
     
-    private var movie: MovieInfo?
+    private var movie: MovieInfoDetail?
     
     static let shared = MovieDetailScreenViewModel()
     
@@ -29,7 +29,7 @@ final class MovieDetailScreenViewModel {
         }
     }
     
-    func getMovie() -> MovieInfo? {
+    func getMovie() -> MovieInfoDetail? {
         return movie
     }
 }

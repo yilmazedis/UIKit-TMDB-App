@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 final class MovieDetailScreenViewController: UIViewController {
     
@@ -32,13 +33,25 @@ final class MovieDetailScreenViewController: UIViewController {
         return iv
     }()
     
-    public lazy var imdbImage: UIImageView = {
-        let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "IMDB Logo")
-        iv.clipsToBounds = true
-        return iv
+    lazy var imdbImage: UIButton = {
+        let btn = UIButton(type: .custom)
+        
+        let largeBoldDoc = UIImage(named: "IMDB Logo")
+        
+        btn.setImage(largeBoldDoc, for: .normal)
+        
+        btn.tintColor = .systemRed
+        btn.addTarget(self, action: #selector(imdbImageTouchUpInside), for: .touchUpInside)
+        return btn
     }()
     
+//    public lazy var imdbImage: UIImageView = {
+//        let iv = UIImageView()
+//        iv.image = #imageLiteral(resourceName: "IMDB Logo")
+//        iv.clipsToBounds = true
+//        return iv
+//    }()
+//
     public lazy var starImage: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "Rate Icon")
@@ -90,6 +103,7 @@ final class MovieDetailScreenViewController: UIViewController {
     }()
     
     var movieId: Int?
+    private var imdbId: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,17 +130,27 @@ final class MovieDetailScreenViewController: UIViewController {
                     return
                 }
                 
-                self?.imageView.af.setImage(withURL: URL(string: K.TMDB.posterUrl + model.poster_path)!)
+                self?.imageView.af.setImage(withURL: URL(string: K.TMDB.posterUrl + model.backdrop_path!)!)
                 self?.dateLabel.text = model.release_date.replacingOccurrences(of: "-", with: ".")
-                //self?.rateLabel.text =
-                
-                
+                            
                 self?.rateLabel.labelColorChange(For: "\(model.vote_average)/10", into: UIColor(hex: K.Color.overRate), from: 3, to: 3)
-                
                 self?.titleLabel.text = model.original_title
                 self?.descriptionLabel.text = model.overview
+                self?.imdbId = model.imdb_id
             }
         }
+    }
+    
+    @objc func imdbImageTouchUpInside() {
+        
+        let webView = WKWebView(frame: view.bounds)
+        
+        let myURL = URL(string: K.IMDb.url + imdbId)
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
+        
+        view.addSubview(webView)
+        print("imdb \(imdbId) ")
     }
     
     private func commonInit() {

@@ -19,6 +19,10 @@ struct K {
         static let paginationAmount = 4
     }
     
+    struct IMDb {
+        static let url = "https://www.imdb.com/title/"
+    }
+    
     struct Color {
         static let overRate = 0xADB5BD
     }
