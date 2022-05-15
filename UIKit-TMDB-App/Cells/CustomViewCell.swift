@@ -18,12 +18,10 @@ class CustomViewCell: UITableViewCell {
         return lbl
     }()
     
-    
     lazy var descriptionLabel : UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = UIFont.systemFont(ofSize: 13)
-        //lbl.frame.inset(by: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30))
         lbl.textAlignment = .left
         lbl.numberOfLines = 2
         return lbl
@@ -33,7 +31,6 @@ class CustomViewCell: UITableViewCell {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.font = UIFont.systemFont(ofSize: 13)
-        //lbl.frame.inset(by: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30))
         lbl.textAlignment = .left
         lbl.numberOfLines = 1
         return lbl
@@ -42,12 +39,10 @@ class CustomViewCell: UITableViewCell {
     lazy var posterImage : UIImageView = {
         let imgView = UIImageView()
         imgView.translatesAutoresizingMaskIntoConstraints = false
-        //imgView.contentMode = .scaleAspectFit
         imgView.layer.cornerRadius = 10.0
         imgView.clipsToBounds = true
         return imgView
     }()
-    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -60,8 +55,6 @@ class CustomViewCell: UITableViewCell {
     }
     
     private func applyConstraints() {
-
-        
         posterImage.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
         posterImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         posterImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
@@ -76,7 +69,6 @@ class CustomViewCell: UITableViewCell {
         
         dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45).isActive = true
         dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25).isActive = true
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -85,12 +77,9 @@ class CustomViewCell: UITableViewCell {
     
     
     public func configure(with model: MovieInfo) {
-        
         titleLabel.text = model.original_title
         descriptionLabel.text = model.overview
         dateLabel.text = model.release_date.replacingOccurrences(of: "-", with: ".")
-        
         posterImage.af.setImage(withURL: URL(string: K.TMDB.posterUrl + model.poster_path)!)
     }
-    
 }

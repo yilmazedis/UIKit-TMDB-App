@@ -10,7 +10,6 @@ import Foundation
 final class MovieDetailScreenViewModel {
     
     private var movie: MovieInfoDetail?
-    
     static let shared = MovieDetailScreenViewModel()
     
     func fetchMovie(with id: Int, completion: @escaping () -> Void) {

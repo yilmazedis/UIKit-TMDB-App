@@ -16,7 +16,6 @@ final class MainScreenViewModel {
     var paginationLength = 0
     
     func fetchNowPlayingMovies(completion: @escaping () -> Void) {
-        
         TMDbManager.shared.fetchMovies(with: K.TMDB.url + "movie/now_playing?api_key=" + K.TMDB.key) { [weak self] result in
             switch result {
             case.success(let data):

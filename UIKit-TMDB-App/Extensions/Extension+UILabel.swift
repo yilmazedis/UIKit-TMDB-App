@@ -13,7 +13,6 @@ extension UILabel {
         var myMutableString = NSMutableAttributedString()
         myMutableString = NSMutableAttributedString(string: givenText as String)
         myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSRange(location: locationNumber,length: length))
-        // set label Attribute
         self.attributedText = myMutableString
     }
 }

@@ -8,14 +8,6 @@
 import Foundation
 import UIKit
 
-enum ManagerFail: Error {
-    case data
-    case error
-    case response
-    case statusCode
-    case decode
-}
-
 class TMDbManager {
     
     static let shared = TMDbManager()

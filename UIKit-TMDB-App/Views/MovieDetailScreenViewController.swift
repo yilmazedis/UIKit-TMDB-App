@@ -26,74 +26,61 @@ final class MovieDetailScreenViewController: UIViewController {
         return view
     }()
     
-    public lazy var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "Moonrise Kingdom")
         iv.clipsToBounds = true
         return iv
     }()
     
-    lazy var imdbImage: UIButton = {
+    private lazy var imdbImage: UIButton = {
         let btn = UIButton(type: .custom)
-        
         let largeBoldDoc = UIImage(named: "IMDB Logo")
         
         btn.setImage(largeBoldDoc, for: .normal)
-        
         btn.tintColor = .systemRed
         btn.addTarget(self, action: #selector(imdbImageTouchUpInside), for: .touchUpInside)
         return btn
     }()
     
-//    public lazy var imdbImage: UIImageView = {
-//        let iv = UIImageView()
-//        iv.image = #imageLiteral(resourceName: "IMDB Logo")
-//        iv.clipsToBounds = true
-//        return iv
-//    }()
-//
-    public lazy var starImage: UIImageView = {
+    private lazy var starImage: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "Rate Icon")
         iv.clipsToBounds = true
         return iv
     }()
     
-    public lazy var dotImage: UIImageView = {
+    private lazy var dotImage: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "dot")
         iv.clipsToBounds = true
         return iv
     }()
     
-    lazy var rateLabel : UILabel = {
+    private lazy var rateLabel : UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 13)
-        lbl.text = "7.8/10"
-        lbl.textAlignment = .left
-        lbl.numberOfLines = 1
-        return lbl
-    }()
-    
-    lazy var dateLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.text = "15.05.2021"
         lbl.font = UIFont.systemFont(ofSize: 13)
         lbl.textAlignment = .left
         lbl.numberOfLines = 1
         return lbl
     }()
     
-    lazy var titleLabel : UILabel = {
+    private lazy var dateLabel : UILabel = {
         let lbl = UILabel()
-        lbl.text = "Moonrise Kingdom (2012)"
+        lbl.font = UIFont.systemFont(ofSize: 13)
+        lbl.textAlignment = .left
+        lbl.numberOfLines = 1
+        return lbl
+    }()
+    
+    private lazy var titleLabel : UILabel = {
+        let lbl = UILabel()
         lbl.font = UIFont.systemFont(ofSize: 20)
         lbl.textAlignment = .left
         lbl.numberOfLines = 1
         return lbl
     }()
     
-    public lazy var descriptionLabel: UILabel = {
+    private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .justified
         label.numberOfLines = 0
@@ -108,10 +95,8 @@ final class MovieDetailScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //title = "Detail Screen"
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .systemBackground
-        //navigationController?.hidesBarsOnSwipe = true
         
         commonInit()
         configure()
@@ -132,8 +117,7 @@ final class MovieDetailScreenViewController: UIViewController {
                 
                 self?.imageView.af.setImage(withURL: URL(string: K.TMDB.posterUrl + model.backdrop_path!)!)
                 self?.dateLabel.text = model.release_date.replacingOccurrences(of: "-", with: ".")
-                            
-                self?.rateLabel.labelColorChange(For: "\(model.vote_average)/10", into: UIColor(hex: K.Color.overRate), from: 3, to: 3)
+                self?.rateLabel.labelColorChange(For: "\(model.vote_average)/10", into: UIColor(hex: K.Color.overTenRateColor), from: 3, to: 3)
                 self?.titleLabel.text = model.original_title
                 self?.descriptionLabel.text = model.overview
                 self?.imdbId = model.imdb_id
@@ -141,7 +125,7 @@ final class MovieDetailScreenViewController: UIViewController {
         }
     }
     
-    @objc func imdbImageTouchUpInside() {
+    @objc private func imdbImageTouchUpInside() {
         
         let webView = WKWebView(frame: view.bounds)
         

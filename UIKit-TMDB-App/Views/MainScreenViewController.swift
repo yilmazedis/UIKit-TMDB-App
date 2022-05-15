@@ -23,15 +23,12 @@ final class MainScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemRed
-        // Do any additional setup after loading the view.
         
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
 
-        //tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         tableView.contentInsetAdjustmentBehavior = .never
-        
         
         configureHeaderUIView()
         configureTableViewCells()
@@ -39,7 +36,6 @@ final class MainScreenViewController: UIViewController {
     }
     
     private func configureRefreshTable() {
-        
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
@@ -70,7 +66,6 @@ final class MainScreenViewController: UIViewController {
                 self?.headerView?.configure(with: movies)
             }
         }
-        
         tableView.tableHeaderView = headerView
     }
     
@@ -79,7 +74,7 @@ final class MainScreenViewController: UIViewController {
         tableView.frame = view.bounds
     }
     
-    @objc func didTapHeader() {
+    @objc private func didTapHeader() {
         
         let id = MainScreenViewModel.shared.getNowPlayingMovie(at: headerView?.displayingMovie ?? 0).id
         let vc = MovieDetailScreenViewController()
@@ -88,7 +83,7 @@ final class MainScreenViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func refresh(_ sender: AnyObject) {
+    @objc private func refresh(_ sender: AnyObject) {
         print("refresh data")
         configureTableViewCells()
         refreshControl.endRefreshing()
@@ -96,8 +91,6 @@ final class MainScreenViewController: UIViewController {
 }
 
 extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
@@ -108,7 +101,6 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         let id = MainScreenViewModel.shared.getUpcomingMovie(at: indexPath.row).id
         let vc = MovieDetailScreenViewController()
         vc.movieId = id
@@ -117,7 +109,6 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: K.MainScreen.cell, for: indexPath) as? CustomViewCell
         else {
             print("Error")

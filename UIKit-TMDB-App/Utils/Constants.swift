@@ -24,7 +24,7 @@ struct K {
     }
     
     struct Color {
-        static let overRate = 0xADB5BD
+        static let overTenRateColor = 0xADB5BD
     }
     
 }
