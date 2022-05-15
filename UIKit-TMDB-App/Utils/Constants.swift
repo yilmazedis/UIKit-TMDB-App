@@ -18,4 +18,8 @@ struct K {
         static let cell = "mainScreenViewCell"
     }
     
+    struct Color {
+        static let overRate = 0xADB5BD
+    }
+    
 }

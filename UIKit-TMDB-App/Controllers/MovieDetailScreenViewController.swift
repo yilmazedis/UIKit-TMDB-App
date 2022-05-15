@@ -85,7 +85,7 @@ final class MovieDetailScreenViewController: UIViewController {
         label.textAlignment = .justified
         label.numberOfLines = 0
         
-        UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 15)
         return label
     }()
     
@@ -118,7 +118,11 @@ final class MovieDetailScreenViewController: UIViewController {
                 
                 self?.imageView.af.setImage(withURL: URL(string: K.TMDB.posterUrl + model.poster_path)!)
                 self?.dateLabel.text = model.release_date.replacingOccurrences(of: "-", with: ".")
-                self?.rateLabel.text = "\(model.vote_average)/10"
+                //self?.rateLabel.text =
+                
+                
+                self?.rateLabel.labelColorChange(For: "\(model.vote_average)/10", into: UIColor(hex: K.Color.overRate), from: 3, to: 3)
+                
                 self?.titleLabel.text = model.original_title
                 self?.descriptionLabel.text = model.overview
             }
