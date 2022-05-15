@@ -89,7 +89,7 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MainScreenViewModel.shared.getUpcomingMovieCount()
+        return MainScreenViewModel.shared.paginationLength
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -112,6 +112,29 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(with: MainScreenViewModel.shared.getUpcomingMovie(at: indexPath.row))
         cell.accessoryType = .disclosureIndicator
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print("display")
+        
+        if MainScreenViewModel.shared.paginationLength >= MainScreenViewModel.shared.getUpcomingMovieCount() {
+            return
+        }
+        
+        if MainScreenViewModel.shared.paginationLength - 1 == indexPath.row {
+            
+            print("paginate")
+            
+            MainScreenViewModel.shared.paginationLength += K.MainScreen.paginationAmount
+            
+            if MainScreenViewModel.shared.paginationLength >= MainScreenViewModel.shared.getUpcomingMovieCount() {
+                MainScreenViewModel.shared.paginationLength = MainScreenViewModel.shared.getUpcomingMovieCount()
+            }
+            
+            tableView.reloadData()
+        }
+        
+        
     }
     
 }

@@ -16,6 +16,7 @@ struct K {
     
     struct MainScreen {
         static let cell = "mainScreenViewCell"
+        static let paginationAmount = 4
     }
     
     struct Color {

@@ -13,6 +13,8 @@ final class MainScreenViewModel {
     private var moviesUpcoming: [MovieInfo]? = []
     static let shared = MainScreenViewModel()
     
+    var paginationLength = 0
+    
     func fetchNowPlayingMovies(completion: @escaping () -> Void) {
         
         TMDbManager.shared.fetchMovies(with: K.TMDB.url + "movie/now_playing?api_key=" + K.TMDB.key) { [weak self] result in
@@ -76,6 +78,7 @@ final class MainScreenViewModel {
                 self?.moviesUpcoming = data
                 
                 print(self?.moviesUpcoming?[0].original_title as Any)
+                self?.paginationLength = 4
                 
                 completion()
                 

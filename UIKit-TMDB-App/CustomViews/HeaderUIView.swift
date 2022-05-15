@@ -26,7 +26,7 @@ class HeaderUIView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         label.text = "Sonic the Hedgehog 2 "
-        
+        label.numberOfLines = 2
         return label
     }()
     
