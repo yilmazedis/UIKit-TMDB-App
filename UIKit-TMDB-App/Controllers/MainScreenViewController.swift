@@ -45,9 +45,10 @@ final class MainScreenViewController: UIViewController {
     
     private func configureHeaderUIView() {
         
-        headerView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300))
-
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
         
+        headerView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300), recognizer: recognizer)
+
         MainScreenViewModel.shared.fetchNowPlayingMovies { [weak self] in
             
             guard let movies = MainScreenViewModel.shared.getNowPlayingMovies() else {
@@ -68,7 +69,15 @@ final class MainScreenViewController: UIViewController {
         super.viewDidLayoutSubviews()
         tableView.frame = view.bounds
     }
-
+    
+    @objc func didTapHeader() {
+        
+        let id = MainScreenViewModel.shared.getNowPlayingMovie(at: headerView?.displayingMovie ?? 0).id
+        let vc = MovieDetailScreenViewController()
+        vc.movieId = id
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
@@ -84,16 +93,12 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        let detailScreen = UINavigationController(rootViewController: MovieDetailScreenViewController())
-//        detailScreen.modalPresentationStyle = .fullScreen
-//
+
         let id = MainScreenViewModel.shared.getUpcomingMovie(at: indexPath.row).id
         let vc = MovieDetailScreenViewController()
         vc.movieId = id
         
         navigationController?.pushViewController(vc, animated: true)
-        //present(MovieDetailScreenViewController(), animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

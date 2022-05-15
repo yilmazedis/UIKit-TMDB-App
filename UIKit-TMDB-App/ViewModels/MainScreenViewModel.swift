@@ -36,6 +36,19 @@ final class MainScreenViewModel {
         return moviesNowPlaying
     }
     
+    func getNowPlayingMovie(at index: Int) -> MovieInfo {
+        guard let movies = moviesNowPlaying else {
+            return MovieInfo(id: 0,
+                             original_title: "",
+                             overview: "",
+                             vote_average: 0,
+                             release_date: "",
+                             poster_path: "",
+                             backdrop_path: "")
+        }
+        return movies[index]
+    }
+    
     func getUpcomingMovie(at index: Int) -> MovieInfo {
 
         guard let movies = moviesUpcoming else {

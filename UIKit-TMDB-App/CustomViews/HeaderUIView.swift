@@ -19,6 +19,8 @@ class HeaderUIView: UIView {
     private var title = [String]()
     private var overview = [String]()
     
+    var displayingMovie: Int = 0
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 375.0, height: 256.0))
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +54,7 @@ class HeaderUIView: UIView {
         return slideshow
     }()
 
-    override init(frame: CGRect) {
+    init(frame: CGRect, recognizer: UITapGestureRecognizer) {
         super.init(frame: frame)
         addSubview(slideshow)
         addSubview(titleLabel)
@@ -62,7 +64,6 @@ class HeaderUIView: UIView {
         slideshow.delegate = self
         //slideshow.setImageInputs(localSource)
         
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap))
         slideshow.addGestureRecognizer(recognizer)
         
         applyConstraints()
@@ -78,18 +79,12 @@ class HeaderUIView: UIView {
 
         let descriptionLabelConstraints = [
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -80),
+            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
             descriptionLabel.widthAnchor.constraint(equalToConstant: frame.size.width - 20)
         ]
 
         NSLayoutConstraint.activate(titleLabelConstraints)
         NSLayoutConstraint.activate(descriptionLabelConstraints)
-    }
-
-    @objc func didTap() {
-//        let fullScreenController = slideshow.presentFullScreenController(from: self)
-//        // set the activity indicator for full screen controller (skipping the line will show no activity indicator)
-//        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
     }
 
     func configure(with model: [MovieInfo]) {
@@ -121,8 +116,12 @@ class HeaderUIView: UIView {
 extension HeaderUIView: ImageSlideshowDelegate {
     func imageSlideshow(_ imageSlideshow: ImageSlideshow, didChangeCurrentPageTo page: Int) {
         
+        displayingMovie = page
+        
         titleLabel.text = title[page]
+        titleLabel.textColor = .white
         descriptionLabel.text = overview[page]
+        descriptionLabel.textColor = .white
         
         print("current page:", page)
     }
