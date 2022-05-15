@@ -18,6 +18,8 @@ final class MainScreenViewController: UIViewController {
         return table
     }()
     
+    private let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemRed
@@ -33,6 +35,14 @@ final class MainScreenViewController: UIViewController {
         
         configureHeaderUIView()
         configureTableViewCells()
+        configureRefreshTable()
+    }
+    
+    private func configureRefreshTable() {
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        tableView.addSubview(refreshControl)
     }
     
     private func configureTableViewCells() {
@@ -61,7 +71,6 @@ final class MainScreenViewController: UIViewController {
             }
         }
         
-        
         tableView.tableHeaderView = headerView
     }
     
@@ -77,6 +86,12 @@ final class MainScreenViewController: UIViewController {
         vc.movieId = id
         
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        print("refresh data")
+        configureTableViewCells()
+        refreshControl.endRefreshing()
     }
 }
 
@@ -115,26 +130,18 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print("display")
-        
         if MainScreenViewModel.shared.paginationLength >= MainScreenViewModel.shared.getUpcomingMovieCount() {
             return
         }
         
         if MainScreenViewModel.shared.paginationLength - 1 == indexPath.row {
-            
-            print("paginate")
-            
+            print("paginate, added \(K.MainScreen.paginationAmount) \(MainScreenViewModel.shared.paginationLength)")
             MainScreenViewModel.shared.paginationLength += K.MainScreen.paginationAmount
             
             if MainScreenViewModel.shared.paginationLength >= MainScreenViewModel.shared.getUpcomingMovieCount() {
                 MainScreenViewModel.shared.paginationLength = MainScreenViewModel.shared.getUpcomingMovieCount()
             }
-            
             tableView.reloadData()
         }
-        
-        
     }
-    
 }
