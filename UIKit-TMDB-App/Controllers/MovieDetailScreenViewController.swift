@@ -82,11 +82,14 @@ final class MovieDetailScreenViewController: UIViewController {
     
     public lazy var descriptionLabel: UILabel = {
         let label = UILabel()
+        label.textAlignment = .justified
         label.numberOfLines = 0
-        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        
         UIFont.systemFont(ofSize: 15)
         return label
     }()
+    
+    var movieId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,9 +97,32 @@ final class MovieDetailScreenViewController: UIViewController {
         //title = "Detail Screen"
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.tintColor = .systemBackground
-        navigationController?.hidesBarsOnSwipe = true
+        //navigationController?.hidesBarsOnSwipe = true
         
         commonInit()
+        configure()
+    }
+    
+    func configure() {
+        
+        guard let movieId = movieId else {
+            print("movieId is nil")
+            return
+        }
+        
+        MovieDetailScreenViewModel.shared.fetchMovie(with: movieId) { [weak self] in
+            DispatchQueue.main.async {
+                guard let model = MovieDetailScreenViewModel.shared.getMovie() else {
+                    return
+                }
+                
+                self?.imageView.af.setImage(withURL: URL(string: K.TMDB.posterUrl + model.poster_path)!)
+                self?.dateLabel.text = model.release_date.replacingOccurrences(of: "-", with: ".")
+                self?.rateLabel.text = "\(model.vote_average)/10"
+                self?.titleLabel.text = model.original_title
+                self?.descriptionLabel.text = model.overview
+            }
+        }
     }
     
     private func commonInit() {

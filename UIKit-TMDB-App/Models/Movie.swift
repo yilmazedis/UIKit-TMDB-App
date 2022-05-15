@@ -12,6 +12,7 @@ struct Movie: Decodable{
 }
 
 struct MovieInfo: Decodable {
+    let id: Int
     let original_title: String
     let overview: String
     let vote_average: Float

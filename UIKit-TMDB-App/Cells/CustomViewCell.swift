@@ -88,7 +88,7 @@ class CustomViewCell: UITableViewCell {
         
         titleLabel.text = model.original_title
         descriptionLabel.text = model.overview
-        dateLabel.text = model.release_date
+        dateLabel.text = model.release_date.replacingOccurrences(of: "-", with: ".")
         
         posterImage.af.setImage(withURL: URL(string: K.TMDB.posterUrl + model.poster_path)!)
     }

@@ -84,13 +84,15 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("sds")
-        
         
 //        let detailScreen = UINavigationController(rootViewController: MovieDetailScreenViewController())
 //        detailScreen.modalPresentationStyle = .fullScreen
 //
-        navigationController?.pushViewController(MovieDetailScreenViewController(), animated: true)
+        let id = MainScreenViewModel.shared.getUpcomingMovie(at: indexPath.row).id
+        let vc = MovieDetailScreenViewController()
+        vc.movieId = id
+        
+        navigationController?.pushViewController(vc, animated: true)
         //present(MovieDetailScreenViewController(), animated: true)
     }
     
@@ -102,22 +104,8 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        
         cell.configure(with: MainScreenViewModel.shared.getUpcomingMovie(at: indexPath.row))
         cell.accessoryType = .disclosureIndicator
-        
-//        cell.descriptionLabel.text = "Edis"
-//        cell.titleLabel.text = "Yilmaz"
-//        cell.dateLabel.text = "15.06.2021"
-//        cell.posterImage.image = UIImage(named: "Moonrise Kingdom")
-////        cell.textLabel?.text = "yilmaz"
-////        cell.imageView?.image = UIImage(named: "Moonrise Kingdom")
-//        cell.accessoryType = .disclosureIndicator
-//
-        //cell.indentationLevel = 2
-        
-        
-                
         return cell
     }
     

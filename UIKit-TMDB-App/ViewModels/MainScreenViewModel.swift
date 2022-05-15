@@ -15,7 +15,7 @@ final class MainScreenViewModel {
     
     func fetchNowPlayingMovies(completion: @escaping () -> Void) {
         
-        TMDbManager.shared.getMovies(with: K.TMDB.url + "movie/now_playing?api_key=" + K.TMDB.key) { [weak self] result in
+        TMDbManager.shared.fetchMovies(with: K.TMDB.url + "movie/now_playing?api_key=" + K.TMDB.key) { [weak self] result in
             switch result {
             case.success(let data):
                 print("Get data Success")
@@ -39,7 +39,8 @@ final class MainScreenViewModel {
     func getUpcomingMovie(at index: Int) -> MovieInfo {
 
         guard let movies = moviesUpcoming else {
-            return MovieInfo(original_title: "",
+            return MovieInfo(id: 0,
+                             original_title: "",
                              overview: "",
                              vote_average: 0,
                              release_date: "",
@@ -54,7 +55,7 @@ final class MainScreenViewModel {
     }
     
     func fetchUpcomingMovies(completion: @escaping () -> Void) {
-        TMDbManager.shared.getMovies(with: K.TMDB.url + "movie/upcoming?api_key=" + K.TMDB.key) { [weak self] result in
+        TMDbManager.shared.fetchMovies(with: K.TMDB.url + "movie/upcoming?api_key=" + K.TMDB.key) { [weak self] result in
             switch result {
             case.success(let data):
                 print("Get data Success")
