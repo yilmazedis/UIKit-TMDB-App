@@ -16,6 +16,15 @@ struct K {
     
     struct MainScreen {
         static let cell = "mainScreenViewCell"
+        static let paginationAmount = 4
+    }
+    
+    struct IMDb {
+        static let url = "https://www.imdb.com/title/"
+    }
+    
+    struct Color {
+        static let overTenRateColor = 0xADB5BD
     }
     
 }

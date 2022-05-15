@@ -10,12 +10,3 @@ import Foundation
 struct Movie: Decodable{
     let results: [MovieInfo]
 }
-
-struct MovieInfo: Decodable {
-    let original_title: String
-    let overview: String
-    let vote_average: Float
-    let release_date: String
-    let poster_path: String
-    let backdrop_path: String?
-}
