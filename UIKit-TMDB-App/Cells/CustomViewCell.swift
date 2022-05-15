@@ -75,7 +75,6 @@ class CustomViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     public func configure(with model: MovieInfo) {
         titleLabel.text = model.original_title
         descriptionLabel.text = model.overview

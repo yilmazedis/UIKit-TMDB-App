@@ -53,7 +53,11 @@ final class MainScreenViewController: UIViewController {
         
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTapHeader))
         
-        headerView = HeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 300), recognizer: recognizer)
+        headerView = HeaderUIView(frame: CGRect(x: 0,
+                                                y: 0,
+                                                width: view.bounds.width,
+                                                height: K.MainScreen.headerHeight),
+                                  recognizer: recognizer)
 
         MainScreenViewModel.shared.fetchNowPlayingMovies { [weak self] in
             
@@ -93,7 +97,7 @@ final class MainScreenViewController: UIViewController {
 extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 160
+        return K.MainScreen.cellHeight
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

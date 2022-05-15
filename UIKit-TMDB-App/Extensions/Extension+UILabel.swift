@@ -8,11 +8,11 @@
 import UIKit
 
 extension UILabel {
-    func labelColorChange(For givenText: String,into color: UIColor, from locationNumber: Int, to length: Int){
-
-        var myMutableString = NSMutableAttributedString()
-        myMutableString = NSMutableAttributedString(string: givenText as String)
-        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSRange(location: locationNumber,length: length))
+    func labelColorChange(for givenText: String, into color: UIColor, from locationNumber: Int, to length: Int){
+        let myMutableString = NSMutableAttributedString(string: givenText as String)
+        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor,
+                                     value: color,
+                                     range: NSRange(location: locationNumber, length: length))
         self.attributedText = myMutableString
     }
 }

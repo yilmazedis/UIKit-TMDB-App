@@ -5,7 +5,7 @@
 //  Created by yilmaz on 13.05.2022.
 //
 
-import Foundation
+import UIKit
 
 struct K {
     struct TMDB {
@@ -17,6 +17,27 @@ struct K {
     struct MainScreen {
         static let cell = "mainScreenViewCell"
         static let paginationAmount = 4
+        
+        static let headerHeight = CGFloat(300)
+        static let cellHeight = CGFloat(160)
+    }
+    
+    struct DetailScreen {
+        static let titleFont = UIFont.systemFont(ofSize: 20)
+        static let descriptionFont = UIFont.systemFont(ofSize: 15)
+        static let imdbLineFont = UIFont.systemFont(ofSize: 13)
+        
+        static let rateLabelColorFrom = 3
+        static let rateLabelColorTo = 3
+        
+        static let rateOver = "/10"
+    }
+    
+    struct HeaderView {
+        static let titleFont = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        static let descriptionFont = UIFont.systemFont(ofSize: 12, weight: .light)
+        
+        static let slideshowInterval = 5.0
     }
     
     struct IMDb {

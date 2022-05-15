@@ -34,8 +34,7 @@ final class MovieDetailScreenViewController: UIViewController {
     
     private lazy var imdbImage: UIButton = {
         let btn = UIButton(type: .custom)
-        let largeBoldDoc = UIImage(named: "IMDB Logo")
-        
+        let largeBoldDoc = #imageLiteral(resourceName: "IMDB Logo")
         btn.setImage(largeBoldDoc, for: .normal)
         btn.tintColor = .systemRed
         btn.addTarget(self, action: #selector(imdbImageTouchUpInside), for: .touchUpInside)
@@ -58,7 +57,7 @@ final class MovieDetailScreenViewController: UIViewController {
     
     private lazy var rateLabel : UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 13)
+        lbl.font = K.DetailScreen.imdbLineFont
         lbl.textAlignment = .left
         lbl.numberOfLines = 1
         return lbl
@@ -66,7 +65,7 @@ final class MovieDetailScreenViewController: UIViewController {
     
     private lazy var dateLabel : UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 13)
+        lbl.font = K.DetailScreen.imdbLineFont
         lbl.textAlignment = .left
         lbl.numberOfLines = 1
         return lbl
@@ -74,7 +73,7 @@ final class MovieDetailScreenViewController: UIViewController {
     
     private lazy var titleLabel : UILabel = {
         let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 20)
+        lbl.font = K.DetailScreen.titleFont
         lbl.textAlignment = .left
         lbl.numberOfLines = 1
         return lbl
@@ -84,8 +83,7 @@ final class MovieDetailScreenViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .justified
         label.numberOfLines = 0
-        
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = K.DetailScreen.descriptionFont
         return label
     }()
     
@@ -117,7 +115,12 @@ final class MovieDetailScreenViewController: UIViewController {
                 
                 self?.imageView.af.setImage(withURL: URL(string: K.TMDB.posterUrl + model.backdrop_path!)!)
                 self?.dateLabel.text = model.release_date.replacingOccurrences(of: "-", with: ".")
-                self?.rateLabel.labelColorChange(For: "\(model.vote_average)/10", into: UIColor(hex: K.Color.overTenRateColor), from: 3, to: 3)
+                
+                self?.rateLabel.labelColorChange(for: String(model.vote_average) + K.DetailScreen.rateOver,
+                                                 into: UIColor(hex: K.Color.overTenRateColor),
+                                                 from: K.DetailScreen.rateLabelColorFrom,
+                                                 to: K.DetailScreen.rateLabelColorTo)
+                
                 self?.titleLabel.text = model.original_title
                 self?.descriptionLabel.text = model.overview
                 self?.imdbId = model.imdb_id
