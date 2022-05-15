@@ -149,8 +149,9 @@ final class MovieDetailScreenViewController: UIViewController {
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
         
-        view.addSubview(webView)
-        print("imdb \(imdbId) ")
+        let vc = UIViewController()
+        vc.view.addSubview(webView)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func commonInit() {
