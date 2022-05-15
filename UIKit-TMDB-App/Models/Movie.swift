@@ -17,4 +17,5 @@ struct MovieInfo: Decodable {
     let vote_average: Float
     let release_date: String
     let poster_path: String
+    let backdrop_path: String?
 }
