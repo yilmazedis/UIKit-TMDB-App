@@ -32,6 +32,15 @@ final class MainScreenViewController: UIViewController {
         
         
         configureHeaderUIView()
+        configureTableViewCells()
+    }
+    
+    private func configureTableViewCells() {
+        MainScreenViewModel.shared.fetchUpcomingMovies { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+        }
     }
     
     private func configureHeaderUIView() {
@@ -41,7 +50,7 @@ final class MainScreenViewController: UIViewController {
         
         MainScreenViewModel.shared.fetchNowPlayingMovies { [weak self] in
             
-            guard let movies = MainScreenViewModel.shared.getMovies() else {
+            guard let movies = MainScreenViewModel.shared.getNowPlayingMovies() else {
                 print("Error getting movies")
                 return
             }
@@ -71,7 +80,7 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return MainScreenViewModel.shared.getUpcomingMovieCount()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -94,14 +103,17 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         
-        cell.descriptionLabel.text = "Edis"
-        cell.titleLabel.text = "Yilmaz"
-        cell.dateLabel.text = "15.06.2021"
-        cell.posterImage.image = UIImage(named: "Moonrise Kingdom")
-//        cell.textLabel?.text = "yilmaz"
-//        cell.imageView?.image = UIImage(named: "Moonrise Kingdom")
+        cell.configure(with: MainScreenViewModel.shared.getUpcomingMovie(at: indexPath.row))
         cell.accessoryType = .disclosureIndicator
         
+//        cell.descriptionLabel.text = "Edis"
+//        cell.titleLabel.text = "Yilmaz"
+//        cell.dateLabel.text = "15.06.2021"
+//        cell.posterImage.image = UIImage(named: "Moonrise Kingdom")
+////        cell.textLabel?.text = "yilmaz"
+////        cell.imageView?.image = UIImage(named: "Moonrise Kingdom")
+//        cell.accessoryType = .disclosureIndicator
+//
         //cell.indentationLevel = 2
         
         

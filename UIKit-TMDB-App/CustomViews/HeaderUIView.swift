@@ -102,7 +102,7 @@ class HeaderUIView: UIView {
             title.append(model.original_title)
             overview.append(model.overview)
             
-            imageSource.append(AlamofireSource(urlString: "https://image.tmdb.org/t/p/original/" + model.poster_path)!)
+            imageSource.append(AlamofireSource(urlString: K.TMDB.posterUrl + model.backdrop_path!)!)
         }
             
         slideshow.setImageInputs(imageSource)

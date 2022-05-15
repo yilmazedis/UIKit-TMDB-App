@@ -67,13 +67,14 @@ class CustomViewCell: UITableViewCell {
         posterImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
         posterImage.widthAnchor.constraint(equalToConstant: 110).isActive = true
         
-        titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: -30).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -10).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: posterImage.trailingAnchor, constant: 20).isActive = true
         
         descriptionLabel.bottomAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: -45).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: posterImage.trailingAnchor, constant: 20).isActive = true
+        descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -35).isActive = true
         
-        dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40).isActive = true
+        dateLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45).isActive = true
         dateLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -25).isActive = true
         
     }
@@ -83,13 +84,13 @@ class CustomViewCell: UITableViewCell {
     }
     
     
-    public func configure(with model: String) {
+    public func configure(with model: MovieInfo) {
         
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model)") else {
-            return
-        }
+        titleLabel.text = model.original_title
+        descriptionLabel.text = model.overview
+        dateLabel.text = model.release_date
         
-        //posterImageView.sd_setImage(with: url, completed: nil)
+        posterImage.af.setImage(withURL: URL(string: K.TMDB.posterUrl + model.poster_path)!)
     }
     
 }
