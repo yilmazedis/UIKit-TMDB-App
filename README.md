@@ -40,7 +40,7 @@
 
 ### Bonuses
 - + Clean code style. +
-- + Abstracting the 3rd party libraries. - (I tried to do it. But I couldn't decided possible way.)
+- + Abstracting the 3rd party libraries. - (I tried to do it. But I couldn't decided if it is necessary.)
 - + MVVM Architecture +
 - + High Order Function usage +
 
