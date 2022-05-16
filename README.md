@@ -24,7 +24,7 @@
 - I didn’t add any UI or UT tests
 
 ## Think I have done or not
-### General Requirements +
+### General Requirements
 -  + App should be coded with Swift Programming Language +
 -  + At least one 3rd party library should be implemented with CocoaPods. +
 -  + All screens should be pixel perfect design. +
@@ -33,12 +33,12 @@
 -  + Codable +
 -  + Network Layer +
 
-### General Optionals
+### General Optionals
 - + Git +
 - + Proper Gitflow Usage (I didnt use GitFlow, but i simulate its flow)
 - + gitignore +
 
-###Bonuses
+### Bonuses
 - + Clean code style. +
 - + Abstracting the 3rd party libraries. - (I tried to do it. But I couldn't decided possible way.)
 - + MVVM Architecture +
