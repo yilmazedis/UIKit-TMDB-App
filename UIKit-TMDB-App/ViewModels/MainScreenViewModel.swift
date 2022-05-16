@@ -19,12 +19,12 @@ final class MainScreenViewModel {
         TMDbManager.shared.fetchMovies(with: K.TMDB.url + "movie/now_playing?api_key=" + K.TMDB.key) { [weak self] result in
             switch result {
             case.success(let data):
-                print("Get data Success")
+                Logger.log(what: K.InfoMessage.api, about: .info)
                 self?.moviesNowPlaying = data
                 completion()
                 
             case.failure(let error):
-                print("Failed: \(error)")
+                Logger.log(what: K.ErrorMessage.movies, over: error)
             }
         }
     }
@@ -66,14 +66,13 @@ final class MainScreenViewModel {
         TMDbManager.shared.fetchMovies(with: K.TMDB.url + "movie/upcoming?api_key=" + K.TMDB.key) { [weak self] result in
             switch result {
             case.success(let data):
-                print("Get data Success")
-                
+                Logger.log(what: K.InfoMessage.api, about: .info)
                 self?.moviesUpcoming = data
                 self?.paginationLength = K.MainScreen.paginationAmount
                 completion()
                 
             case.failure(let error):
-                print("Failed: \(error)")
+                Logger.log(what: K.ErrorMessage.movies, over: error)
             }
         }
     }

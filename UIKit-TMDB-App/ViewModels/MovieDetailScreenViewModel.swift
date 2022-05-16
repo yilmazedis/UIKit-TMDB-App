@@ -16,12 +16,12 @@ final class MovieDetailScreenViewModel {
         TMDbManager.shared.fetchMovie(with: K.TMDB.url + "movie/\(id)?api_key=" + K.TMDB.key) { [weak self] result in
             switch result {
             case.success(let data):
-                print("Get data Success")
+                Logger.log(what: K.InfoMessage.api, about: .info)
                 self?.movie = data
                 completion()
                 
             case.failure(let error):
-                print("Failed: \(error)")
+                Logger.log(what: K.ErrorMessage.movies, over: error)
             }
         }
     }
