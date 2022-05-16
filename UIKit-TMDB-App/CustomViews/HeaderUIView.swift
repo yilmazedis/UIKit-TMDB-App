@@ -16,18 +16,18 @@ class HeaderUIView: UIView {
     var displayingMovie: Int = 0
     
     lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 375.0, height: 256.0))
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        label.font = K.HeaderView.titleFont
         label.numberOfLines = 2
         return label
     }()
     
     lazy var descriptionLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 375.0, height: 256.0))
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 6
-        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        label.font = K.HeaderView.descriptionFont
         
         return label
     }()
@@ -36,7 +36,7 @@ class HeaderUIView: UIView {
         let slideshow = ImageSlideshow()
         
         slideshow.clipsToBounds = true
-        slideshow.slideshowInterval = 5.0
+        slideshow.slideshowInterval = K.HeaderView.slideshowInterval
         slideshow.contentScaleMode = .scaleAspectFill
         slideshow.activityIndicator = DefaultActivityIndicator()
         return slideshow
@@ -82,6 +82,11 @@ class HeaderUIView: UIView {
             imageSource.append(AlamofireSource(urlString: K.TMDB.posterUrl + model.backdrop_path!)!)
         }
         slideshow.setImageInputs(imageSource)
+        
+        titleLabel.text = model[0].original_title
+        titleLabel.textColor = .white
+        descriptionLabel.text = model[0].overview
+        descriptionLabel.textColor = .white
     }
 
     override func layoutSubviews() {
@@ -102,6 +107,5 @@ extension HeaderUIView: ImageSlideshowDelegate {
         titleLabel.textColor = .white
         descriptionLabel.text = overview[page]
         descriptionLabel.textColor = .white
-        print("current page: \(page)")
     }
 }

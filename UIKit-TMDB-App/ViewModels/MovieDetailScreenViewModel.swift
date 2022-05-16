@@ -17,9 +17,7 @@ final class MovieDetailScreenViewModel {
             switch result {
             case.success(let data):
                 print("Get data Success")
-                
                 self?.movie = data
-                                
                 completion()
                 
             case.failure(let error):

@@ -20,11 +20,7 @@ final class MainScreenViewModel {
             switch result {
             case.success(let data):
                 print("Get data Success")
-                
                 self?.moviesNowPlaying = data
-                
-                print(self?.moviesNowPlaying?[0].original_title as Any)
-                
                 completion()
                 
             case.failure(let error):
@@ -73,10 +69,7 @@ final class MainScreenViewModel {
                 print("Get data Success")
                 
                 self?.moviesUpcoming = data
-                
-                print(self?.moviesUpcoming?[0].original_title as Any)
-                self?.paginationLength = 4
-                
+                self?.paginationLength = K.MainScreen.paginationAmount
                 completion()
                 
             case.failure(let error):
