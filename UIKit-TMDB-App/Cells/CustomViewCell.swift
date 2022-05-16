@@ -72,7 +72,7 @@ class CustomViewCell: UITableViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(K.ErrorMessage.requiredInit)
     }
     
     public func configure(with model: MovieInfo) {

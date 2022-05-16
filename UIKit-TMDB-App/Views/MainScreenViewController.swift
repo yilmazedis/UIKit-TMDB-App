@@ -34,7 +34,7 @@ final class MainScreenViewController: UIViewController {
     }
     
     private func configureRefreshTable() {
-        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing")
+        refreshControl.attributedTitle = NSAttributedString(string: K.MainScreen.refreshAttribute)
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         tableView.addSubview(refreshControl)
     }
@@ -60,7 +60,7 @@ final class MainScreenViewController: UIViewController {
         MainScreenViewModel.shared.fetchNowPlayingMovies { [weak self] in
             
             guard let movies = MainScreenViewModel.shared.getNowPlayingMovies() else {
-                print("Error getting movies")
+                Logger.log(what: K.ErrorMessage.movies, about: .error)
                 return
             }
             
@@ -77,16 +77,14 @@ final class MainScreenViewController: UIViewController {
     }
     
     @objc private func didTapHeader() {
-        
         let id = MainScreenViewModel.shared.getNowPlayingMovie(at: headerView?.displayingMovie ?? 0).id
         let vc = MovieDetailScreenViewController()
         vc.movieId = id
-        
         navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func refresh(_ sender: AnyObject) {
-        print("refresh data")
+        Logger.log(what: K.InfoMessage.refreshPage, about: .info)
         configureTableViewCells()
         refreshControl.endRefreshing()
     }
@@ -111,9 +109,9 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.MainScreen.cell, for: indexPath) as? CustomViewCell
-        else {
-            print("Error")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.MainScreen.cell,
+                                                       for: indexPath) as? CustomViewCell else {
+            Logger.log(what: K.ErrorMessage.cell, about: .error)
             return UITableViewCell()
         }
         
@@ -124,11 +122,13 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if MainScreenViewModel.shared.paginationLength >= MainScreenViewModel.shared.getUpcomingMovieCount() {
+            Logger.log(what: K.InfoMessage.paginationLength, about: .info)
             return
         }
         
         if MainScreenViewModel.shared.paginationLength - 1 == indexPath.row {
-            print("paginate, added \(K.MainScreen.paginationAmount) \(MainScreenViewModel.shared.paginationLength)")
+            Logger.log(what: "paginate, added \(K.MainScreen.paginationAmount) \(MainScreenViewModel.shared.paginationLength)",
+                       about: .info)
             MainScreenViewModel.shared.paginationLength += K.MainScreen.paginationAmount
             
             if MainScreenViewModel.shared.paginationLength >= MainScreenViewModel.shared.getUpcomingMovieCount() {

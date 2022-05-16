@@ -20,6 +20,8 @@ struct K {
         
         static let headerHeight = CGFloat(300)
         static let cellHeight = CGFloat(160)
+        
+        static let refreshAttribute = "Refreshing"
     }
     
     struct DetailScreen {
@@ -48,4 +50,22 @@ struct K {
         static let overTenRateColor = 0xADB5BD
     }
     
+    struct Date {
+        static let format = "yyyy-MM-dd HH:mm:ss"
+    }
+    
+    struct ErrorMessage {
+        static let model = "Model is nil"
+        static let movieId = "MovieId is nil"
+        static let cell = "Cell is nil"
+        static let movies = "Movies is nil"
+        static let requiredInit = "init(coder:) has not been implemented"
+        static let url = "Fail to conver urlStr to url"
+    }
+    
+    struct InfoMessage {
+        static let paginationLength = "Pagination length is equal to fetched data length"
+        static let refreshPage = "Refresh page"
+        static let api = "Fetching data is successed"
+    }
 }

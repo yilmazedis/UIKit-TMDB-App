@@ -103,17 +103,18 @@ final class MovieDetailScreenViewController: UIViewController {
     func configure() {
         
         guard let movieId = movieId else {
-            print("movieId is nil")
+            Logger.log(what: K.ErrorMessage.movieId, about: .error)
             return
         }
         
         MovieDetailScreenViewModel.shared.fetchMovie(with: movieId) { [weak self] in
             DispatchQueue.main.async {
                 guard let model = MovieDetailScreenViewModel.shared.getMovie() else {
+                    Logger.log(what: K.ErrorMessage.model, about: .error)
                     return
                 }
                 
-                self?.imageView.af.setImage(withURL: URL(string: K.TMDB.posterUrl + model.backdrop_path!)!)
+                self?.imageView.af.setImage(withURL: URL(string: K.TMDB.posterUrl + (model.backdrop_path ?? ""))!)
                 self?.dateLabel.text = model.release_date.replacingOccurrences(of: "-", with: ".")
                 
                 self?.rateLabel.labelColorChange(for: String(model.vote_average) + K.DetailScreen.rateOver,

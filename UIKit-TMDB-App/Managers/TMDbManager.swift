@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 class TMDbManager {
     
@@ -15,7 +14,7 @@ class TMDbManager {
     func fetchMovies(with urlStr: String, completion: @escaping (Result<[MovieInfo], Error>) -> Void) {
         
         guard let url = URL(string: urlStr) else {
-            print("Fail to conver urlStr to url")
+            Logger.log(what: K.ErrorMessage.url, about: .error)
             return
         }
         
@@ -54,7 +53,7 @@ class TMDbManager {
     func fetchMovie(with urlStr: String, completion: @escaping (Result<MovieInfoDetail, Error>) -> Void) {
         
         guard let url = URL(string: urlStr) else {
-            print("Fail to conver urlStr to url")
+            Logger.log(what: K.ErrorMessage.url, about: .error)
             return
         }
         

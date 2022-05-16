@@ -14,6 +14,7 @@
 - /movie/now_playing for slider.
 - /movie/upcoming for list.
 - /movie/{movie_id}. for movie details.
+- I added an appropriate Logger, make clear all info and errors.
 - I used MVVM as default design pattern
 - I devided Constants, Extension, Enumeration, protocols as much as possible.
 - I devided groups with related files.
@@ -22,7 +23,7 @@
 - I try to avoid massive ViewController. So, I devided function with related extensions.
 - I didn’t add any UI or UT tests
 
-## Think I am done or not
+## Think I have done or not
 ### General Requirements +
 -  + App should be coded with Swift Programming Language +
 -  + At least one 3rd party library should be implemented with CocoaPods. +
