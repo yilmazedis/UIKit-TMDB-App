@@ -23,9 +23,9 @@
 		019B5D92283059270079159F /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D91283059270079159F /* Movie.swift */; };
 		019B5D9428305D890079159F /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D9328305D890079159F /* MainScreenViewModel.swift */; };
 		019B5D96283082920079159F /* MovieDetailScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D95283082920079159F /* MovieDetailScreenViewModel.swift */; };
-		019B5D99283129070079159F /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D98283129070079159F /* Extension+UIImage.swift */; };
-		019B5D9B283129840079159F /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D9A283129840079159F /* Extension+UIColor.swift */; };
-		019B5D9D283138380079159F /* Extension+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D9C283138380079159F /* Extension+UILabel.swift */; };
+		019B5D99283129070079159F /* Ext+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D98283129070079159F /* Ext+UIImage.swift */; };
+		019B5D9B283129840079159F /* Ext+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D9A283129840079159F /* Ext+UIColor.swift */; };
+		019B5D9D283138380079159F /* Ext+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D9C283138380079159F /* Ext+UILabel.swift */; };
 		019B5D9F28319E140079159F /* MovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5D9E28319E140079159F /* MovieInfo.swift */; };
 		019B5DA128319E250079159F /* MovieInfoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5DA028319E250079159F /* MovieInfoDetail.swift */; };
 		019B5DA32831A06A0079159F /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B5DA22831A06A0079159F /* Enumerations.swift */; };
@@ -72,9 +72,9 @@
 		019B5D91283059270079159F /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		019B5D9328305D890079159F /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
 		019B5D95283082920079159F /* MovieDetailScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailScreenViewModel.swift; sourceTree = "<group>"; };
-		019B5D98283129070079159F /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
-		019B5D9A283129840079159F /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
-		019B5D9C283138380079159F /* Extension+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UILabel.swift"; sourceTree = "<group>"; };
+		019B5D98283129070079159F /* Ext+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UIImage.swift"; sourceTree = "<group>"; };
+		019B5D9A283129840079159F /* Ext+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UIColor.swift"; sourceTree = "<group>"; };
+		019B5D9C283138380079159F /* Ext+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UILabel.swift"; sourceTree = "<group>"; };
 		019B5D9E28319E140079159F /* MovieInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfo.swift; sourceTree = "<group>"; };
 		019B5DA028319E250079159F /* MovieInfoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfoDetail.swift; sourceTree = "<group>"; };
 		019B5DA22831A06A0079159F /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
@@ -240,9 +240,9 @@
 		019B5D97283128F20079159F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				019B5D98283129070079159F /* Extension+UIImage.swift */,
-				019B5D9A283129840079159F /* Extension+UIColor.swift */,
-				019B5D9C283138380079159F /* Extension+UILabel.swift */,
+				019B5D98283129070079159F /* Ext+UIImage.swift */,
+				019B5D9A283129840079159F /* Ext+UIColor.swift */,
+				019B5D9C283138380079159F /* Ext+UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -512,9 +512,9 @@
 				019B5D9F28319E140079159F /* MovieInfo.swift in Sources */,
 				019B5D9428305D890079159F /* MainScreenViewModel.swift in Sources */,
 				019B5DA32831A06A0079159F /* Enumerations.swift in Sources */,
-				019B5D9D283138380079159F /* Extension+UILabel.swift in Sources */,
+				019B5D9D283138380079159F /* Ext+UILabel.swift in Sources */,
 				019B5D84282F12420079159F /* MovieDetailScreenViewController.swift in Sources */,
-				019B5D99283129070079159F /* Extension+UIImage.swift in Sources */,
+				019B5D99283129070079159F /* Ext+UIImage.swift in Sources */,
 				019B5D92283059270079159F /* Movie.swift in Sources */,
 				019B5D8B282FCEDD0079159F /* CustomViewCell.swift in Sources */,
 				019B5D50282EEA7D0079159F /* AppDelegate.swift in Sources */,
@@ -522,7 +522,7 @@
 				019B5D52282EEA7D0079159F /* SceneDelegate.swift in Sources */,
 				019B5D96283082920079159F /* MovieDetailScreenViewModel.swift in Sources */,
 				019B5D90283057FD0079159F /* TMDbManager.swift in Sources */,
-				019B5D9B283129840079159F /* Extension+UIColor.swift in Sources */,
+				019B5D9B283129840079159F /* Ext+UIColor.swift in Sources */,
 				019B5D82282EEE3E0079159F /* Constants.swift in Sources */,
 				019B5DA128319E250079159F /* MovieInfoDetail.swift in Sources */,
 			);
