@@ -107,6 +107,5 @@ extension HeaderUIView: ImageSlideshowDelegate {
         titleLabel.textColor = .white
         descriptionLabel.text = overview[page]
         descriptionLabel.textColor = .white
-        print("current page: \(page)")
     }
 }

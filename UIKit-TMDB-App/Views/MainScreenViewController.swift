@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ImageSlideshow
 
 final class MainScreenViewController: UIViewController {
     
@@ -22,12 +21,11 @@ final class MainScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemRed
         
         view.addSubview(tableView)
+        
         tableView.delegate = self
         tableView.dataSource = self
-
         tableView.contentInsetAdjustmentBehavior = .never
         
         configureHeaderUIView()
