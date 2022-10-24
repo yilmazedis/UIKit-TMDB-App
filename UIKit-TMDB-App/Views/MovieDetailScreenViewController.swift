@@ -163,6 +163,17 @@ final class MovieDetailScreenViewController: UIViewController {
     }
     
     private func setupContentViewConstraints() {
+        
+        /*
+            If you want your scrollView to scroll vertically(up & down), 
+            make your contentView which is in the hierarchy of the scrollView 
+            equal width to the ViewController and give it a height constraint 
+            that works for your project i.e. 700. For the opposite(horizontally) 
+            make the height equal to the ViewController and the width some big number 
+            that works for your project.
+        
+            https://stackoverflow.com/a/55088579/7657265
+        */
         scrollView.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         let heightConstraint = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
