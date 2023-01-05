@@ -11,7 +11,6 @@ final class MainScreenViewModel {
     
     private var moviesNowPlaying: [MovieInfo]? = []
     private var moviesUpcoming: [MovieInfo]? = []
-    static let shared = MainScreenViewModel()
     
     var paginationLength = 0
     
