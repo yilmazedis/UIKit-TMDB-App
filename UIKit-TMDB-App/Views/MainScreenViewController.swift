@@ -10,6 +10,7 @@ import UIKit
 final class MainScreenViewController: UIViewController {
     
     private var headerView: HeaderUIView?
+    private var viewModel = MainScreenViewModel ()
     
     private let tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -40,7 +41,7 @@ final class MainScreenViewController: UIViewController {
     }
     
     private func configureTableViewCells() {
-        MainScreenViewModel.shared.fetchUpcomingMovies { [weak self] in
+        viewModel.fetchUpcomingMovies { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
@@ -57,9 +58,9 @@ final class MainScreenViewController: UIViewController {
                                                 height: K.MainScreen.headerHeight),
                                   recognizer: recognizer)
 
-        MainScreenViewModel.shared.fetchNowPlayingMovies { [weak self] in
+        viewModel.fetchNowPlayingMovies { [weak self] in
             
-            guard let movies = MainScreenViewModel.shared.getNowPlayingMovies() else {
+            guard let movies = self?.viewModel.getNowPlayingMovies() else {
                 Logger.log(what: K.ErrorMessage.movies, about: .error)
                 return
             }
@@ -77,7 +78,7 @@ final class MainScreenViewController: UIViewController {
     }
     
     @objc private func didTapHeader() {
-        let id = MainScreenViewModel.shared.getNowPlayingMovie(at: headerView?.displayingMovie ?? 0).id
+        let id = viewModel.getNowPlayingMovie(at: headerView?.displayingMovie ?? 0).id
         let vc = MovieDetailScreenViewController()
         vc.movieId = id
         navigationController?.pushViewController(vc, animated: true)
@@ -97,11 +98,11 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MainScreenViewModel.shared.paginationLength
+        return viewModel.paginationLength
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let id = MainScreenViewModel.shared.getUpcomingMovie(at: indexPath.row).id
+        let id = viewModel.getUpcomingMovie(at: indexPath.row).id
         let vc = MovieDetailScreenViewController()
         vc.movieId = id
         
@@ -115,24 +116,24 @@ extension MainScreenViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configure(with: MainScreenViewModel.shared.getUpcomingMovie(at: indexPath.row))
+        cell.configure(with: viewModel.getUpcomingMovie(at: indexPath.row))
         cell.accessoryType = .disclosureIndicator
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if MainScreenViewModel.shared.paginationLength >= MainScreenViewModel.shared.getUpcomingMovieCount() {
+        if viewModel.paginationLength >= viewModel.getUpcomingMovieCount() {
             Logger.log(what: K.InfoMessage.paginationLength, about: .info)
             return
         }
         
-        if MainScreenViewModel.shared.paginationLength - 1 == indexPath.row {
-            Logger.log(what: "paginate, added \(K.MainScreen.paginationAmount) \(MainScreenViewModel.shared.paginationLength)",
+        if viewModel.paginationLength - 1 == indexPath.row {
+            Logger.log(what: "paginate, added \(K.MainScreen.paginationAmount) \(viewModel.paginationLength)",
                        about: .info)
-            MainScreenViewModel.shared.paginationLength += K.MainScreen.paginationAmount
+            viewModel.paginationLength += K.MainScreen.paginationAmount
             
-            if MainScreenViewModel.shared.paginationLength >= MainScreenViewModel.shared.getUpcomingMovieCount() {
-                MainScreenViewModel.shared.paginationLength = MainScreenViewModel.shared.getUpcomingMovieCount()
+            if viewModel.paginationLength >= viewModel.getUpcomingMovieCount() {
+                viewModel.paginationLength = viewModel.getUpcomingMovieCount()
             }
             tableView.reloadData()
         }

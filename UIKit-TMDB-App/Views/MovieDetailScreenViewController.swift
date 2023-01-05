@@ -89,6 +89,7 @@ final class MovieDetailScreenViewController: UIViewController {
     
     var movieId: Int?
     private var imdbId: String = ""
+    private var viewModel = MovieDetailScreenViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,9 +108,9 @@ final class MovieDetailScreenViewController: UIViewController {
             return
         }
         
-        MovieDetailScreenViewModel.shared.fetchMovie(with: movieId) { [weak self] in
+        viewModel.fetchMovie(with: movieId) { [weak self] in
             DispatchQueue.main.async {
-                guard let model = MovieDetailScreenViewModel.shared.getMovie() else {
+                guard let model = self?.viewModel.getMovie() else {
                     Logger.log(what: K.ErrorMessage.model, about: .error)
                     return
                 }
